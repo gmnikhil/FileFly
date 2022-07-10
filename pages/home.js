@@ -8,6 +8,7 @@ import {
   MoreInfoSection,
   Navbar,
 } from "../components";
+import { useWalletDetails } from "../hooks/blockChain";
 
 export default function Home() {
   const jumbotronRef = useRef();
@@ -49,13 +50,28 @@ export default function Home() {
       });
   };
 
-  const address = useAddress();
-  const connectWithMetamask = useMetamask();
-  const disconnectWallet = useDisconnect();
-
+  // const address = useAddress();
+  // const connectWithMetamask = useMetamask();
+  // const disconnectWallet = useDisconnect();
+  const { acc, healthNet, loading } = useWalletDetails();
   const router = useRouter();
 
-  const connectWallet = connectWithMetamask;
+  const connectWallet = async () => {
+    if (!acc) {
+      alert("Connect metamask");
+      return;
+    }
+    const doctor = await healthNet.methods.isDoctor(acc);
+    const hospital = await healthNet.methods
+      .isHospital(acc)
+      .send({ from: acc });
+
+    if (doctor) {
+      router.push("/doctor");
+    } else if (hospital) {
+      router.push("/hospital");
+    }
+  };
 
   const goToDashboard = () => {
     router.push("/doctor");
@@ -65,14 +81,11 @@ export default function Home() {
     <div ref={homeRef}>
       <Navbar
         handleClick={goTo}
-        handleConnect={address ? disconnectWallet : connectWallet}
-        text={address ? "Disconnect Wallet" : "Connect Wallet"}
+        handleConnect={connectWallet}
+        text={"Connect Wallet"}
       />
       <div ref={jumbotronRef}>
-        <Jumbotron
-          handleConnect={address ? goToDashboard : connectWallet}
-          text={address ? "Go to Dashboard" : "Connect Wallet"}
-        />
+        <Jumbotron handleConnect={connectWallet} text={"Connect Wallet"} />
       </div>
       <div ref={infoRef}>
         <InfoSection />

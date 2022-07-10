@@ -3,7 +3,7 @@ import Web3 from "web3";
 import data from "../HealthNet.json";
 
 export function useWalletDetails() {
-  const contract_address = "0x702fa152EBDD749D48695d1b5b5F44C108404D2a";
+  const contract_address = "0xf9dEf041c0714Af8eE6eD7D15BD0A1622cC5B1a6";
 
   async function loadWeb3() {
     if (window.ethereum) {
