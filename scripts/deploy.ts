@@ -2,6 +2,7 @@ import { ethers } from "hardhat";
 import fs from 'fs';
 import path from 'path';
 import * as child_process from 'child_process';
+import { HealthNet } from "../typechain-types";
 
 const deploy_address = path.join(__dirname, '../deploy_address')
 
@@ -15,16 +16,38 @@ function copyABI() {
     child_process.execSync(`cp ${src} ${dest}`);
 }
 
+
+async function dummyData(health_net: HealthNet) {
+    const hospital = "0x3B87223646ACc9A148BA437f21b5ce4c9A35F79a";
+    const owner = "0x82427ae292798ea3A0C67066b2596AaCe5F493CE";
+    const doctor = "0xD053e0cFCBd2499811435EB31fdD99d3624Ad504";
+    const patient = "0x41a6AabBEc3C1b70bbac6572D966ca6c4bB6eFbd";
+
+    console.log('Adding hospital');
+    await health_net.addHospital(hospital, "NYC");
+    console.log('Adding doctors');
+    await health_net.addDoctor([doctor, owner]);
+    console.log('Editing records');
+    await health_net.editReport(owner, "https://dweb.link/ipfs/QmbWqxBEKC3P8tqsKc98xmWNzrzDtRLMiMPL8wBuTGsMnR")
+    await health_net.editReport(patient, "https://dweb.link/ipfs/QmbWqxBEKC3P8tqsKc98xmWNzrzDtRLMiMPL8wBuTGsMnR")
+    await health_net.editReport(owner, "https://dweb.link/ipfs/QmbWqxBEKC3P8tqsKc98xmWNzrzDtRLMiMPL8wBuTGsMnR")
+    await health_net.editReport(patient, "https://dweb.link/ipfs/QmbWqxBEKC3P8tqsKc98xmWNzrzDtRLMiMPL8wBuTGsMnR")
+    await health_net.editReport(patient, "https://dweb.link/ipfs/QmbWqxBEKC3P8tqsKc98xmWNzrzDtRLMiMPL8wBuTGsMnR")
+    await health_net.editReport(owner, "https://dweb.link/ipfs/QmbWqxBEKC3P8tqsKc98xmWNzrzDtRLMiMPL8wBuTGsMnR")
+}
+
 async function main() {
   const HealthNet = await ethers.getContractFactory("HealthNet");
   const health_net = await HealthNet.deploy();
 
   await health_net.deployed();
+  console.log("HealthNet deployed to:", health_net.address);
 
   writeAddress(health_net.address);
   copyABI();
 
-  console.log("HealthNet deployed to:", health_net.address);
+  await dummyData(health_net);
+
 }
 
 main().catch((error) => {
