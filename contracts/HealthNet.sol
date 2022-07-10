@@ -17,10 +17,10 @@ contract HealthNet {
         uint prevIdx;
     }
 
-    uint hospitalCount = 0;
+    uint public hospitalCount = 0;
     Hospital[] public hospitals;
 
-    uint doctorCount = 0;
+    uint public doctorCount = 0;
     address payable[] public doctors;
 
     uint public reportCount = 0;

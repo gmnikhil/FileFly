@@ -27,12 +27,17 @@ async function dummyData(health_net: HealthNet) {
     await health_net.addHospital(hospital, "NYC");
     console.log('Adding doctors');
     await health_net.addDoctor([doctor, owner]);
-    console.log('Editing records');
+    console.log('Adding record 1');
     await health_net.editReport(owner, "https://dweb.link/ipfs/QmbWqxBEKC3P8tqsKc98xmWNzrzDtRLMiMPL8wBuTGsMnR")
+    console.log('Adding record 2');
     await health_net.editReport(patient, "https://dweb.link/ipfs/QmbWqxBEKC3P8tqsKc98xmWNzrzDtRLMiMPL8wBuTGsMnR")
+    console.log('Adding record 3');
     await health_net.editReport(owner, "https://dweb.link/ipfs/QmbWqxBEKC3P8tqsKc98xmWNzrzDtRLMiMPL8wBuTGsMnR")
+    console.log('Adding record 4');
     await health_net.editReport(patient, "https://dweb.link/ipfs/QmbWqxBEKC3P8tqsKc98xmWNzrzDtRLMiMPL8wBuTGsMnR")
+    console.log('Adding record 5');
     await health_net.editReport(patient, "https://dweb.link/ipfs/QmbWqxBEKC3P8tqsKc98xmWNzrzDtRLMiMPL8wBuTGsMnR")
+    console.log('Adding record 6');
     await health_net.editReport(owner, "https://dweb.link/ipfs/QmbWqxBEKC3P8tqsKc98xmWNzrzDtRLMiMPL8wBuTGsMnR")
 }
 
