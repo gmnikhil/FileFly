@@ -6,12 +6,11 @@ import 'hardhat/console.sol';
 contract HealthNet {
     address public owner;
 
-    struct Hospital {
+    struct Admin {
         address addr;
-        string location;
     }
 
-    struct Report {
+    struct File {
         string link;
         address user;
         uint prevIdx;
@@ -23,17 +22,22 @@ contract HealthNet {
     uint public doctorCount = 0;
     address payable[] public doctors;
 
+    uint public adminCount = 0;
+    Admin[] public admins;
+
     uint public reportCount = 0;
-    Report[] public reports;
+    File[] public files;
     mapping(address => uint) public reportUserMap;
 
     constructor() {
         owner = msg.sender;
-        Report memory _r;
+        File memory _r;
         _r.user = 0x0000000000000000000000000000000000000000;
         _r.link = "";
         _r.prevIdx = 0;
-        reports.push(_r);
+        files.push(_r);
+        adminCount++;
+        admins.push(owner);
     }
 
     function isHospital(address _addr) public view returns(bool) {
@@ -50,10 +54,23 @@ contract HealthNet {
         return false;
     }
 
+    function isAdmin(address _addr) public view returns(bool) {
+        for (uint i = 0; i < adminCount; i++) {
+            if (_addr == admins[i].addr) return true;
+        }
+        return false;
+    }
+
     function addHospital(address _addr, string memory _location) public {
         require(owner == msg.sender, "Only Owner can add hospital");
         hospitalCount++;
         hospitals.push(Hospital(_addr, _location));
+    }
+
+    function addAdmin(address _addr) public {
+        require(isAdmin(msg.sender), "Only admin can add another admin");
+        adminCount++;
+        admins.push(Admin(_addr));
     }
 
     function addDoctor(address payable[] calldata _addr) public payable {
@@ -70,13 +87,13 @@ contract HealthNet {
     function editReport(address _addr, string memory _link) public {
         require(
             isDoctor(msg.sender),
-            "Only a doctor can change report"
+            "Only a doctor can change File"
         );
-        Report memory _r;
+        File memory _r;
         _r.user = _addr;
         _r.link = _link;
         _r.prevIdx = reportUserMap[_addr];
-        reports.push(_r);
+        files.push(_r);
         reportUserMap[_addr] = ++reportCount;
     }
 }
