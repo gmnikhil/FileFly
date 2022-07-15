@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import Web3 from "web3";
-import data from "../HealthNet.json";
+//import data from "../FileFly.json";
 
+const data = {
+  abi: "hel",
+};
 export function useWalletDetails() {
   const contract_address = "0xf9dEf041c0714Af8eE6eD7D15BD0A1622cC5B1a6";
 
@@ -19,7 +22,7 @@ export function useWalletDetails() {
   }
 
   const [acc, setAccount] = useState();
-  const [healthNet, setHealthNet] = useState();
+  const [FileFly, setFileFly] = useState();
 
   const [loading, setLoading] = useState(true);
 
@@ -29,7 +32,7 @@ export function useWalletDetails() {
     setAccount(accounts[0]);
     if (contract_address) {
       const hnet = new web3.eth.Contract(data.abi, contract_address);
-      setHealthNet(hnet);
+      setFileFly(hnet);
       setLoading(false);
     } else {
       window.alert("The dapp contract could not be deployed to network");
@@ -45,5 +48,5 @@ export function useWalletDetails() {
     init();
   }, []);
 
-  return { acc, healthNet, loading };
+  return { acc, FileFly, loading };
 }

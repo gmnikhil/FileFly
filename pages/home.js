@@ -53,7 +53,7 @@ export default function Home() {
   // const address = useAddress();
   // const connectWithMetamask = useMetamask();
   // const disconnectWallet = useDisconnect();
-  const { acc, healthNet, loading } = useWalletDetails();
+  const { acc, FileFly, loading } = useWalletDetails();
   const router = useRouter();
 
   const connectWallet = async () => {
@@ -61,10 +61,8 @@ export default function Home() {
       alert("Connect metamask");
       return;
     }
-    const doctor = await healthNet.methods.isDoctor(acc);
-    const hospital = await healthNet.methods
-      .isHospital(acc)
-      .send({ from: acc });
+    const doctor = await FileFly.methods.isDoctor(acc);
+    const hospital = await FileFly.methods.isHospital(acc).send({ from: acc });
 
     if (doctor) {
       router.push("/doctor");

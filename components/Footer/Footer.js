@@ -23,7 +23,7 @@ export default function Footer({ ref }) {
               </svg>
             </div>
             <span class="self-center !-ml-2 text-2xl font-semibold">
-              HealthNet
+              FileFly
             </span>
           </a>
         </div>
@@ -176,7 +176,7 @@ export default function Footer({ ref }) {
         </div>
       </div>
       <div class="text-center p-4 mb-4">
-        ©2022 HealthNet. All rights reserved.
+        ©2022 FileFly. All rights reserved.
       </div>
     </footer>
   );

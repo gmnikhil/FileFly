@@ -1,21 +1,20 @@
 import { useEffect, useState } from "react";
-import Web3 from "web3";
-import data from "../HealthNet.json";
+
 import { useWalletDetails } from "../hooks/blockChain";
 
 export default function Home() {
-  const { acc, healthNet, loading } = useWalletDetails();
+  const { acc, FileFly, loading } = useWalletDetails();
 
   const initi = async () => {
-    console.log(await healthNet.methods.owner().call());
+    console.log(await FileFly.methods.owner().call());
   };
 
   useEffect(() => {
-    console.log(healthNet);
-    if (healthNet) {
+    console.log(FileFly);
+    if (FileFly) {
       initi();
     }
-  }, [healthNet]);
+  }, [FileFly]);
   return (
     <div>
       {loading ? (

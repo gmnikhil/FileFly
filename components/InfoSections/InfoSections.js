@@ -21,7 +21,7 @@ export function Info() {
           <br /> Take a Peek ^ ^
         </h1>
       </div>
-      <div className="grid grid-cols-2 gap-8 mx-16 lg:grid-cols-3 place-items-center">
+      <div className="grid grid-cols-2 gap-8 mx-16 lg:grid-cols-3 ">
         {[
           {
             image: blockchainIcon.src,
@@ -83,7 +83,7 @@ export function MoreInfo({ handleClick }) {
           <span className="italic">We've got your back ::</span>
         </h1>
         <h5 className="w-10/12 text-lg mx-auto">
-          HealthNet brings the doctor for your needs right to your home!
+          FileFly brings the doctor for your needs right to your home!
         </h5>
         <div className="flex items-center justify-center gap-5">
           <Button

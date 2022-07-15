@@ -11,7 +11,7 @@ export default function Doctor() {
   const [file_name, setFileName] = useState("");
   const [file_description, setFileDescription] = useState("");
 
-  const { acc, healthNet, loading } = useWalletDetails();
+  const { acc, FileFly, loading } = useWalletDetails();
 
   const [reports, setReports] = useState([]);
 
@@ -23,10 +23,10 @@ export default function Doctor() {
   };
 
   const fetchReports = async () => {
-    const reportCount = await healthNet.methods.reportCount().call();
+    const reportCount = await FileFly.methods.reportCount().call();
     let reps = [];
     for (let i = 1; i <= reportCount; i++) {
-      reps[i - 1] = await healthNet.methods.reports(i).call();
+      reps[i - 1] = await FileFly.methods.reports(i).call();
     }
     console.log(reps);
     setReports(reps);
@@ -43,7 +43,7 @@ export default function Doctor() {
     }
     console.log(user);
     console.log(url);
-    const r = await healthNet.methods.editReport(user, url).send({ from: acc });
+    const r = await FileFly.methods.editReport(user, url).send({ from: acc });
     console.log(r);
     setFile(null);
     setFileName("");

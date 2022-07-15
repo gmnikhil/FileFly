@@ -14,10 +14,10 @@ export default function Jumbotron({ handleClick, handleConnect, text }) {
           style={{ lineHeight: "1.5cm" }}
         >
           Keep all your Records safe and secure with{" "}
-          <span className="italic">HealthNet&nbsp;:)</span>
+          <span className="italic">FileFly&nbsp;:)</span>
         </h1>
         <h5 className="w-8/12 mx-auto md:mx-0">
-          Your data is safe and secure with Healthnet powered by Blockchain!
+          Your data is safe and secure with FileFly powered by Blockchain!
         </h5>
         <div className="flex items-center justify-center md:justify-start gap-5">
           <Button
