@@ -1,6 +1,7 @@
 import { useAddress, useDisconnect, useMetamask } from "@thirdweb-dev/react";
 import { useRouter } from "next/router";
 import { useRef } from "react";
+import { toast } from "react-toastify";
 import {
   Footer,
   InfoSection,
@@ -56,23 +57,26 @@ export default function Home() {
   const { acc, FileFly, loading } = useWalletDetails();
   const router = useRouter();
 
-  const connectWallet = async () => {
-    if (!acc) {
-      alert("Connect metamask");
-      return;
-    }
-    const doctor = await FileFly.methods.isDoctor(acc);
-    const hospital = await FileFly.methods.isHospital(acc).send({ from: acc });
-
-    if (doctor) {
-      router.push("/doctor");
-    } else if (hospital) {
-      router.push("/hospital");
-    }
+  const goToDashboard = () => {
+    router.push("/dashboard");
   };
 
-  const goToDashboard = () => {
-    router.push("/doctor");
+  const connectWallet = async () => {
+    if (!acc) {
+      //alert("Connect metamask");
+      toast.warn("Connect metamask");
+      return;
+    }
+    const admin = await FileFly.methods.isAdmin(acc).call();
+    const owner = await FileFly.methods.isOwner(acc).call();
+    //console.log(admin);
+    //const hospital = await FileFly.methods.isHospital(acc).send({ from: acc });
+
+    if (admin || owner) {
+      router.push("/admin");
+    } else if (acc) {
+      goToDashboard();
+    }
   };
 
   return (

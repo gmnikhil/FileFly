@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 import { useWalletDetails } from "../hooks/blockChain";
 
@@ -9,22 +10,10 @@ export default function Home() {
     console.log(await FileFly.methods.owner().call());
   };
 
+  const router = useRouter();
+
   useEffect(() => {
-    console.log(FileFly);
-    if (FileFly) {
-      initi();
-    }
-  }, [FileFly]);
-  return (
-    <div>
-      {loading ? (
-        <>
-          <button onClick={() => {}}>Disconnect Wallet</button>
-          <p className="bg-red-300">Your address: {}</p>
-        </>
-      ) : (
-        <button onClick={() => {}}>Connect with Metamask</button>
-      )}
-    </div>
-  );
+    router.replace("/home");
+  }, []);
+  return null;
 }

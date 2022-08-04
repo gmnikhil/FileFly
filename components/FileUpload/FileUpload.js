@@ -29,7 +29,7 @@ const dropzoneChildren = (status, theme) => (
   <Group
     position="center"
     spacing="xl"
-    style={{ minHeight: 220, pointerEvents: "none" }}
+    style={{ minHeight: 120, pointerEvents: "none" }}
   >
     <ImageUploadIcon
       status={status}
@@ -39,11 +39,11 @@ const dropzoneChildren = (status, theme) => (
 
     <div>
       <Text size="xl" inline>
-        Drag images here or click to select files
+        Drag image here or click to select file
       </Text>
-      <Text size="sm" color="dimmed" inline mt={7}>
+      {/* <Text size="sm" color="dimmed" inline mt={7}>
         Attach as many files as you like, each file should not exceed 5mb
-      </Text>
+      </Text> */}
     </div>
   </Group>
 );
@@ -54,8 +54,8 @@ export default function DropzoneWrapper({ handleFile }) {
     <Dropzone
       onDrop={(files) => handleFile(files[0])}
       onReject={(files) => alert("file too large => rejected")}
-      maxSize={3 * 1024 ** 2}
-      accept={IMAGE_MIME_TYPE}
+      //maxSize={3 * 1024 ** 2}
+      //accept={IMAGE_MIME_TYPE}
       multiple={false}
     >
       {(status) => dropzoneChildren(status, theme)}

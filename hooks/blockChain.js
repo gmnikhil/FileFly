@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
 import Web3 from "web3";
-//import data from "../FileFly.json";
+import data from "../FileFly.json";
 
-const data = {
-  abi: "hel",
-};
 export function useWalletDetails() {
-  const contract_address = "0xf9dEf041c0714Af8eE6eD7D15BD0A1622cC5B1a6";
+  const contract_address = "0xd71442A099AFa1e21020FCEF7C2b1965bA1db018";
 
   async function loadWeb3() {
     if (window.ethereum) {

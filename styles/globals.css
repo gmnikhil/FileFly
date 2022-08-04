@@ -18,3 +18,30 @@ a {
 * {
   box-sizing: border-box;
 }
+.hideScroll {
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+.hideScroll::-webkit-scrollbar {
+  /* WebKit */
+  width: 0;
+  height: 0;
+}
+.customScroll::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background-color: white;
+  border: 1px solid #00174d;
+}
+
+.customScroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  border-radius: 10px;
+  background-color: #00174d;
+}
+
+.customScroll::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #00174d;
+}

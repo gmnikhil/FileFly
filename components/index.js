@@ -1,5 +1,4 @@
-export { default as Dashboard } from "./Dashboard/Dashboard";
-export { default as DragAndDrop } from "./Doctor/FileUpload";
+export { default as DragAndDrop } from "./FileUpload/FileUpload";
 export { default as Navbar } from "./Navbar/Navbar";
 export { default as Jumbotron } from "./Jumbotron/Jumbotron";
 export {
