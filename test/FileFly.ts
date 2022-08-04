@@ -43,48 +43,48 @@ describe("FileFly contract", function () {
   it("Should add admin", async function () {
     const { file_fly, addr1 } = await loadFixture(deployFileFlyFixture);
 
-    await file_fly.addAdmin(addr1.address);
+    await file_fly.addAdmin(addr1.address, "Alan");
     expect(await file_fly.isAdmin(addr1.address)).to.equal(true);
   });
 
-  it("Should add file", async function () {
-    const { file_fly, addr1, addr2 } = await loadFixture(deployFileFlyFixture);
+  // it("Should add file", async function () {
+  //   const { file_fly, addr1, addr2 } = await loadFixture(deployFileFlyFixture);
 
-    await file_fly
-      .connect(addr2)
-      .addFile(
-        "<image_link>",
-        "Sample",
-        "Sample Description",
-        "sample_timestamp"
-      );
-    expect(await file_fly.fileCount()).to.equal(BigInt(1));
-  });
+  //   await file_fly
+  //     .connect(addr2)
+  //     .addFile(
+  //       "<image_link>",
+  //       "Sample",
+  //       "Sample Description",
+  //       "sample_timestamp"
+  //     );
+  //   expect(await file_fly.fileCount()).to.equal(BigInt(1));
+  // });
 
-  async function getFiles(file_fly: FileFly, userAddress: string) {
-    let fileCount = await file_fly.fileCount();
-    const user_files = [];
-    for (let i = 0; i < fileCount; i++) {
-      const data = await file_fly.files(i);
-      if (data.user == userAddress) user_files.push(data);
-    }
-    return user_files;
-  }
+  //   async function getFiles(file_fly: FileFly, userAddress: string) {
+  //     let fileCount = await file_fly.fileCount();
+  //     const user_files = [];
+  //     for (let i = 0; i < fileCount; i++) {
+  //       const data = await file_fly.files(i);
+  //       if (data.user == userAddress) user_files.push(data);
+  //     }
+  //     return user_files;
+  //   }
 
-  it("Test getFiles function", async function () {
-    const { file_fly, addr2, addr8, addr10 } = await loadFixture(
-      deployFileFlyFixture
-    );
+  //   it("Test getFiles function", async function () {
+  //     const { file_fly, addr2, addr8, addr10 } = await loadFixture(
+  //       deployFileFlyFixture
+  //     );
 
-    await file_fly
-      .connect(addr2)
-      .addFile(
-        "<image_link>",
-        "Sample",
-        "Sample Description",
-        "sample_timestamp"
-      );
+  //     await file_fly
+  //       .connect(addr2)
+  //       .addFile(
+  //         "<image_link>",
+  //         "Sample",
+  //         "Sample Description",
+  //         "sample_timestamp"
+  //       );
 
-    await getFiles(file_fly, addr2.address);
-  });
+  //     await getFiles(file_fly, addr2.address);
+  //   });
 });

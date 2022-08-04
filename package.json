@@ -5,6 +5,7 @@
     "hardhat": "^2.10.0"
   },
   "dependencies": {
+    "@nomiclabs/hardhat-ganache": "^2.0.1",
     "dotenv": "^16.0.1"
   }
 }
